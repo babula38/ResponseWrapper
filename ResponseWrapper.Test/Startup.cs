@@ -39,7 +39,7 @@ namespace ResponseWrapper.Test
             }
 
             app.UseRouting();
-
+            app.UseErrorWrapper();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
