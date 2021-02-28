@@ -6,7 +6,7 @@ namespace Microsoft.AspNetCore.Builder
     {
         public static IApplicationBuilder UseErrorWrapper(this IApplicationBuilder builder)
         {
-            builder.UseMiddleware<ExceptionWrappperMiddleware>();
+            builder.UseMiddleware<ApiExceptionWrapperMiddleware>();
 
             return builder;
         }

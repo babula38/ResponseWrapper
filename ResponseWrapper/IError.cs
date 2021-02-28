@@ -9,14 +9,14 @@ namespace ResponseWrapper
 
     public class ProblemDetails
     {
-        public ProblemDetails(string code, string message, string developerErrorMessage = "")
+        public ProblemDetails(int code, string message, string developerErrorMessage = "")
         {
-            Code = code ?? throw new ArgumentNullException(nameof(code));
+            Code = code;
             Message = message ?? throw new ArgumentNullException(nameof(message));
             DeveloperErrorMessage = developerErrorMessage ?? throw new ArgumentNullException(nameof(developerErrorMessage));
         }
 
-        public string Code { get; private set; }
+        public int Code { get; private set; }
 
         public string Message { get; private set; }
 
