@@ -31,10 +31,11 @@ namespace ResponseWrapper.AspnetCore
             {
                 // Use new IHttpResponseBodyFeature for abstractions of pilelines/streams etc.
                 // For 3.x this works reliably while direct Response.Body was causing random HTTP failures
-                context.Features.Set<IHttpResponseBodyFeature>(new StreamResponseBodyFeature(memoryStreamResponse));
+                //context.Features.Set<IHttpResponseBodyFeature>(new StreamResponseBodyFeature(memoryStreamResponse));
 
                 await _next(context);
-
+                await memoryStreamResponse.CopyToAsync(originalBodyFeature.Stream);
+                memoryStreamResponse.Seek(0, SeekOrigin.Begin);
                 //problemResponse.Flush();                //problemResponse.Flush();
             }
             catch (System.Exception ex)
@@ -71,7 +72,7 @@ namespace ResponseWrapper.AspnetCore
                     //await stringContent.CopyToAsync(originalBodyFeature.Stream);
                     //originalBodyFeature.Stream.Seek(0, SeekOrigin.Begin);
 
-                    httpResponseFeature.StatusCode = StatusCodes.Status500InternalServerError;
+                    //httpResponseFeature.StatusCode = StatusCodes.Status500InternalServerError;
                     //context.Response.StatusCode = StatusCodes.Status500InternalServerError;
                     await memoryStreamResponse.CopyToAsync(originalBodyFeature.Stream);
                     memoryStreamResponse.Seek(0, SeekOrigin.Begin);

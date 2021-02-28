@@ -12,8 +12,10 @@ namespace ResponseWrapper.AspnetCore
         public override void OnActionExecuted(ActionExecutedContext context)
         {
             if (context.Exception != null)
-                //context.ExceptionHandled = true;
-            return;
+            {
+                context.ExceptionHandled = false;
+                return;
+            }
 
             if (context.HttpContext.Response.StatusCode != StatusCodes.Status200OK)
                 return;
