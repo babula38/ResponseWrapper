@@ -32,7 +32,7 @@ namespace ResponseWrapper.Test.Controllers
         }
         public ProblemDetails GetProblemDetails(Exception exception)
         {
-            return new ProblemDetails("500", "Custom error", "Developer error message");
+            return new ProblemDetails(500, "Custom error", "Developer error message");
         }
     }
 }
